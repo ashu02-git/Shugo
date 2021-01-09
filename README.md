@@ -49,4 +49,5 @@
 - JS ライブラリ：jQuery
 - IDE：Cloud9
 
-
+## 使用素材
+https://www.designevo.com/logo-maker/
