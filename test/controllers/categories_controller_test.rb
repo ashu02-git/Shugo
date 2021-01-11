@@ -25,5 +25,4 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     get categories_destroy_url
     assert_response :success
   end
-
 end
