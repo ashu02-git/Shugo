@@ -17,4 +17,8 @@ Rails.application.routes.draw do
     post 'admins/sign_in' => 'admins/sessions#create', as: 'admin_session'
     delete 'admins/sign_out' => 'admins/sessions#destroy', as: 'destroy_admin_session'
   end
+
+  namespace :admins do
+    resources :categories, only: [:create, :index, :edit, :update, :destroy]
+  end
 end

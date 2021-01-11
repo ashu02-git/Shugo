@@ -1,0 +1,16 @@
+
+<h2>カテゴリ追加</h2>
+<%= form_with medel:@new_category, local:true do |f| %>
+  <h4>カテゴリ名</h4>
+  <%= f.text_field :name %>
+  <%= f.submit '追加' %>
+<% end %>
+
+<h2>カテゴリ一覧</h2>
+<% @categories.each do |category| %>
+<div>
+  <%= category.name %>
+  <%= link_to '編集' %>
+  <%= link_to '削除' %>
+</div>
+<% end %>
