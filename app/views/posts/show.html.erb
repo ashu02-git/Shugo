@@ -1,0 +1,8 @@
+<h4><%= @post.title %></h4>
+<p><%= attachment_image_tag @post, :image, :fill, 300, 400 %></p>
+<p>ユーザネーム: <%= @post.user.name %></p>
+<p>評価:</p>
+<p>説明:</p>
+<p><%= @post.body %></p>
+<p><%= link_to '編集'%></p>
+<p><%= link_to '削除'%></p>
