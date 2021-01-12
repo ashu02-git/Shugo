@@ -11,4 +11,6 @@ class User < ApplicationRecord
       user.password_confirmation = user.password
     end
   end
+  # User:Post = 1:N
+  has_many :posts, dependent: :destroy
 end

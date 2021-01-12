@@ -21,4 +21,6 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :categories, only: [:create, :index, :edit, :update, :destroy]
   end
+
+  resources :posts
 end
