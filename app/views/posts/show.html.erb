@@ -4,5 +4,5 @@
 <p>評価:</p>
 <p>説明:</p>
 <p><%= @post.body %></p>
-<p><%= link_to '編集'%></p>
-<p><%= link_to '削除'%></p>
+<p><%= link_to '編集', edit_post_path %></p>
+<p><%= link_to '削除', post_path, method: :delete %></p>
