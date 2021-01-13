@@ -3,7 +3,22 @@
 <div>
   <p><%= attachment_image_tag post, :image, :fill, 200, 200 %></p>
   <p>タイトル:<%= link_to post.title, post_path(post.id) %></p>
-  <p>評価</p>
+  <p>
+  評価: <span id="star-rate-<%= post.id %>"></span>
+  <script>
+      // 繰り返し処理でもidを一意
+    $('#star-rate-<%= post.id %>').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      // 読み込み表示のみ
+      readOnly: true,
+      score: <%= post.rate %>,
+    });
+  </script>
+  </p>
   <p>ユーザーネーム:<%= post.user.name %></p>
 </div>
 <% end %>

@@ -6,7 +6,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.text :body
       t.string :image_id
-      t.float :rate, null: false, default: 0
+      t.float :rate, default: 0, null: false
       t.timestamps
     end
   end
