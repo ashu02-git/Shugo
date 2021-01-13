@@ -6,8 +6,23 @@
   <%= f.text_field :title %><br />
   <%= f.label 'カテゴリ' %>
   <%= f.collection_select :category_id, Category.all, :id, :name %><br />
-  <%= f.label '評価' %><br />
+  <!--評価欄-->
+  <div class="field" id="star">
+    <%= f.label :evaluation, "評価：" %>
+    <%= f.hidden_field :rate, id: :review_star %>
+  </div>
   <%= f.label '説明' %>
   <%= f.text_area :body %><br />
   <%= f.submit '投稿する'%>
 <% end %>
+<!--評価欄JavaScript-->
+<script>
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    scoreName: 'post[rate]',
+    half: true,
+  });
+</script>
