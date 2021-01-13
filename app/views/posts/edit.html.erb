@@ -7,7 +7,7 @@
   <%= f.label 'カテゴリ' %>
   <%= f.collection_select :category_id, Category.all, :id, :name %><br />
   <!--評価欄-->
-  <div class="field", data-score=<%= @post.rate %>, id="star-rate-<%= @post.id %>">
+  <div class="field", data-score=<%= @post.rate %>, id="star">
     <%= f.label :rate, "評価：" %>
     <%= f.hidden_field :rate, id: :review_star %>
   </div>
@@ -18,13 +18,4 @@
 <p></p>
 
 <!--評価欄JavaScript-->
-<script>
-$('#star-rate-<%= @post.id %>').raty({
-  size: 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  starHalf: '<%= asset_path('star-half.png') %>',
-  scoreName: 'post[rate]',
-  half: true,
-});
-</script>
+<%= render 'posts/rate' %>
