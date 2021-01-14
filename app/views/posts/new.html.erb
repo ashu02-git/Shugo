@@ -11,9 +11,8 @@
     <%= f.label :evaluation, "評価：" %>
     <%= f.hidden_field :rate, id: :review_star %>
   </div>
-  <%= f.label '説明' %>
-  <%= f.text_area :body %><br />
-  *ハッシュタグに全角の＃は使えません<br />
+  <%= f.label '説明' %> *ハッシュタグに全角＃は使えません<br />
+  <%= f.text_area :body, size: "40x4", placeholder: "口当たり、味わい、後味などの感想をここに" %><br />
   <%= f.submit '投稿する'%>
 <% end %>
 <!--評価欄JavaScript-->

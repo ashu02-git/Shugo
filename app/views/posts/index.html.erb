@@ -4,21 +4,32 @@
   <p><%= attachment_image_tag post, :image, :fill, 200, 200 %></p>
   <p>タイトル:<%= link_to post.title, post_path(post.id) %></p>
   <p>
-  評価: <span id="star-rate-<%= post.id %>"></span>
-  <script>
-      // 繰り返し処理でもidを一意
-    $('#star-rate-<%= post.id %>').raty({
-      size: 36,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn : '<%= asset_path('star-on.png') %>',
-      starHalf: '<%= asset_path('star-half.png') %>',
-      half: true,
-      // 読み込み表示のみ
-      readOnly: true,
-      score: <%= post.rate %>,
-    });
-  </script>
+    評価: <span id="star-rate-<%= post.id %>"></span>
+    <script>
+        // 繰り返し処理でもidを一意
+      $('#star-rate-<%= post.id %>').raty({
+        size: 36,
+        starOff:  '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        half: true,
+        // 読み込み表示のみ
+        readOnly: true,
+        score: <%= post.rate %>,
+      });
+    </script>
   </p>
+  <span>コメント件数：<%= post.post_comments.count %></span>
+  <!--いいねの保存と削除分岐-->
+  <% if post.favorited_by?(current_user) %>
+      <%= link_to post_favorites_path(post), method: :delete do %>
+        <span style="color:red;">♥</span><%= post.favorites.count %>
+      <% end %>
+  <% else %>
+      <%= link_to post_favorites_path(post), method: :post do %>
+        <span style="color:red;">♡</span><%= post.favorites.count %>
+      <% end %>
+  <% end %>
   <p>ユーザーネーム:<%= post.user.name %></p>
 </div>
 <% end %>
