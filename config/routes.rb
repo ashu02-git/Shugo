@@ -23,4 +23,5 @@ Rails.application.routes.draw do
   end
 
   resources :posts
+  get '/posts/hashtag/:name', to: "posts#hashtag"
 end

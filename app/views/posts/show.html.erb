@@ -3,7 +3,7 @@
 <p>ユーザネーム: <%= @post.user.name %></p>
 <p>評価: <span id="star"></span></p>
 <p>説明:</p>
-<p><%= @post.body %></p>
+<p><%= render_with_hashtags(@post.body) %></p>
 <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete %></p>
 <p><%= link_to '一覧へ戻る', posts_path %></p>
 

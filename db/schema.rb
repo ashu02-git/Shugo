@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_12_023200) do
+ActiveRecord::Schema.define(version: 2021_01_13_064609) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,6 +29,21 @@ ActiveRecord::Schema.define(version: 2021_01_12_023200) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hash_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_hashtag_relations", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "hashtag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashtag_id"], name: "index_post_hashtag_relations_on_hashtag_id"
+    t.index ["post_id"], name: "index_post_hashtag_relations_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
