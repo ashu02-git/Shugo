@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
   resources :posts do
     resource :favorites, only: [:create, :destroy]
+    resource :post_comments, only: [:create, :destroy]
   end
   get '/posts/hashtag/:name', to: "posts#hashtag"
 end

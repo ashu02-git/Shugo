@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   # postとhashtagの中間テーブル
   has_many :post_hashtag_relations
   has_many :hashtags, through: :post_hashtag_relations
+  # Post:PostComment = 1:N
+  has_many :post_comments, dependent: :destroy
   # Post:Favorite = 1:N
   has_many :favorites, dependent: :destroy
   # ユーザが投稿に対していいね済みか判別

@@ -15,4 +15,6 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   # User:Favorite = 1:N
   has_many :favorites, dependent: :destroy
+  # User:PostComment = 1:N
+  has_many :post_comments, dependent: :destroy
 end
