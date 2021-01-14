@@ -35,6 +35,12 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  # ハッシュタグに紐づいたpost一覧
+  def hashtag
+    @tag = Hashtag.find_by(hash_name: params[:name])
+    @posts = @tag.posts
+  end
+
   private
 
   def post_params
