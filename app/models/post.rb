@@ -1,12 +1,18 @@
 class Post < ApplicationRecord
+  # 画像attachment
+  attachment :image
   # User:PostとCategory:Post = 1:N
   belongs_to :user
   belongs_to :category
   # postとhashtagの中間テーブル
   has_many :post_hashtag_relations
   has_many :hashtags, through: :post_hashtag_relations
-  # 画像attachment
-  attachment :image
+  # Post:Favorite = 1:N
+  has_many :favorites, dependent: :destroy
+  # ユーザが投稿に対していいね済みか判別
+  def favorited_by?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 
   # DBにコミット直前に実施
   after_create do

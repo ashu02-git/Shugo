@@ -13,4 +13,6 @@ class User < ApplicationRecord
   end
   # User:Post = 1:N
   has_many :posts, dependent: :destroy
+  # User:Favorite = 1:N
+  has_many :favorites, dependent: :destroy
 end
