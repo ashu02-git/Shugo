@@ -12,7 +12,7 @@
 <p>評価: <span id="star"></span></p>
 <p>説明:</p>
 <p><%= render_with_hashtags(@post.body) %></p>
-<p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete %></p>
+<p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
 <!--いいねの保存と削除分岐-->
 <% if @post.favorited_by?(current_user) %>
   <p>
@@ -27,6 +27,28 @@
     <% end %>
   </p>
 <% end %>
+<!--コメント一覧-->
+<div class="comments">
+  <p>コメント件数：<%= @post.post_comments.count %></p>
+  <% @post.post_comments.each do |post_comment| %>
+    <%= post_comment.comment %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+    <%= post_comment.user.name %>
+    <% if post_comment.user == current_user %>
+      <div class="comment-delete">
+        <%= link_to '削除', post_post_comment_path(post_comment.post, post_comment), method: :delete, data: { confirm: '削除しますか？' } %>
+      </div>
+    <% end %>
+    <br />
+  <% end %>
+</div>
+<!--コメント入力欄-->
+<div class="new-comment">
+  <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
+    <%= f.text_area :comment, size: "40x2", placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
 
 <p><%= link_to '一覧へ戻る', posts_path %></p>
 
