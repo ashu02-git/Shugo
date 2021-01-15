@@ -11,6 +11,8 @@ class User < ApplicationRecord
       user.password_confirmation = user.password
     end
   end
+  # 画像attachment
+  attachment :profile_image
   # User:Post = 1:N
   has_many :posts, dependent: :destroy
   # User:Favorite = 1:N
