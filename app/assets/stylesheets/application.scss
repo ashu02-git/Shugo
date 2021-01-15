@@ -16,3 +16,29 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+// profileアイコン画像
+.profile_icon {
+  width:  120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+// post_image
+.post_image {
+  width:  200px;
+  height: 200px;
+  object-fit: contain;
+}
+// post_profile_icon
+.post_profile_icon {
+  width:  60px;
+  height: 60px;
+  border-radius: 50%;
+}
+// post_image_show
+.post_image_show {
+  width:  400px;
+  height: 400px;
+  object-fit: contain;
+}

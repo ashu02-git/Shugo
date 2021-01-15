@@ -1,4 +1,13 @@
-<h2>投稿一覧</h2>
+<div class="profile-container">
+  <h3 class="profile-name">ユーザ:<%= @user.name %></h3>
+  <%= attachment_image_tag @user, :profile_image, class: "profile_icon", fallback: "shugo_logo.png" %><br />
+  <br />
+  <% if @user.id == current_user.id %>
+    <p><%= link_to 'ユーザ編集', edit_user_path(@user.id) %></p>
+  <% end %>
+</div>
+
+<h2><%= @user.name %>さんの投稿一覧</h2>
 <% @posts.each do |post| %>
 <div>
   <p><%= attachment_image_tag post, :image, class: "post_image" %></p>
@@ -19,10 +28,6 @@
     });
   </script>
   </p>
-  <p>
-    投稿者:<br />
-    <%= attachment_image_tag post.user, :profile_image, class: "post_profile_icon", fallback: "shugo_logo.png" %>
-    <%= post.user.name %>
-  </p>
+  <p>ユーザーネーム:<%= post.user.name %></p>
 </div>
 <% end %>
