@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :categories, only: [:create, :index, :edit, :update, :destroy]
   end
 
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index, :show, :edit, :update]
 
   resources :posts do
     resource :favorites, only: [:create, :destroy]
