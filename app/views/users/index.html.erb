@@ -3,5 +3,6 @@
   <%= link_to user_path(user.id) do %>
     <%= attachment_image_tag user, :profile_image, class: "post_profile_icon", fallback: "shugo_logo.png" %>
     <%= user.name %><br />
+    <%= render 'relationships/follow_button', follow_user: user %>
   <% end %>
 <% end %>
