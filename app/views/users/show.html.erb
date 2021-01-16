@@ -1,9 +1,15 @@
 <div class="profile-container">
-  <h3 class="profile-name">ユーザ:<%= @user.name %></h3>
+  <h3 class="profile-name">
+    ユーザ:<%= @user.name %>
+    <% if @user.is_deleted == true %>
+      <span style="color:red;">（退会済み）</span>
+    <% end %>
+  </h3>
   <%= attachment_image_tag @user, :profile_image, class: "profile_icon", fallback: "shugo_logo.png" %><br />
   <br />
-  <% if @user.id == current_user.id %>
+  <% if user_signed_in? && @user.id == current_user.id %>
     <p><%= link_to 'ユーザ編集', edit_user_path(@user.id) %></p>
+    <p><%= link_to "退会", user_hide_path(current_user.id), method: :patch, data: { confirm: '退会しますか？' }, class: "btn btn-outline-danger" %></p>
   <% end %>
 </div>
 

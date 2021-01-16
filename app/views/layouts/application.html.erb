@@ -10,7 +10,18 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <header>
+      <%= render 'layouts/header' %>
+    </header>
+    <br>
+    <!--flashメッセージ表示-->
+    <div class="notifications">
+      <% flash.each do |key, value| %>
+        <!--CSS適用 flash keyのクラス作成-->
+        <%= content_tag(:div, value, class: key) %>
+      <% end %>
+    </div>
+
     <%= yield %>
   </body>
 </html>
