@@ -16,6 +16,20 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+// flashメッセージ
+.notifications {
+  color: white;
+  text-align: center;
+
+  .notice {
+    background-color: lightBlue;
+  }
+
+  .alert, .error {
+    background-color: #FF5733;
+  }
+}
+
 
 // profileアイコン画像
 .profile_icon {

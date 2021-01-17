@@ -23,10 +23,11 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show, :edit, :update]
+  patch 'users/:id/hide' => 'users#hide',as: 'user_hide'
 
   resources :posts do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  get '/posts/hashtag/:name', to: "posts#hashtag"
+  get '/posts/hashtag/:name' => 'posts#hashtag'
 end

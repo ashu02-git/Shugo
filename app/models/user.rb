@@ -3,7 +3,12 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  # ゲスト登録情報
+
+  has_many :posts, dependent: :destroy # User:Post = 1:N
+  has_many :favorites, dependent: :destroy # User:Favorite = 1:N
+  has_many :post_comments, dependent: :destroy # User:PostComment = 1:N
+
+  # ゲスト情報登録
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|
       user.name = "Guest"
@@ -11,12 +16,10 @@ class User < ApplicationRecord
       user.password_confirmation = user.password
     end
   end
+  #退会済みか確認
+  def active_for_authentication?
+    super && (self.is_deleted == false)
+  end
   # 画像attachment
   attachment :profile_image
-  # User:Post = 1:N
-  has_many :posts, dependent: :destroy
-  # User:Favorite = 1:N
-  has_many :favorites, dependent: :destroy
-  # User:PostComment = 1:N
-  has_many :post_comments, dependent: :destroy
 end
