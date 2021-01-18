@@ -25,6 +25,12 @@ class PostsController < ApplicationController
   end
 
   def edit
+    # 編集者制限
+    if @post.user_id != current_user.id
+      redirect_to posts_path, alert: 'アクセスできません'
+    else
+      render :edit
+    end
   end
 
   def update
@@ -39,8 +45,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_path, alert: '投稿を削除しました'
+    # 編集者制限
+    if @post.user_id != current_user.id
+      redirect_to posts_path, alert: 'アクセスできません'
+    else
+      @post.destroy
+      redirect_to posts_path, alert: '投稿を削除しました'
+    end
   end
 
   # ハッシュタグに紐づいたpost一覧
@@ -58,4 +69,5 @@ class PostsController < ApplicationController
   def set_post
     @post = Post.find(params[:id])
   end
+
 end

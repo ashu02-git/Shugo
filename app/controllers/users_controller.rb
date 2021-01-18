@@ -10,6 +10,14 @@ class UsersController < ApplicationController
   end
 
   def edit
+    # 編集者制限
+    if @user.id != current_user.id
+      redirect_to user_path(@user.id), alert: 'アクセスできません'
+    elsif @user.email == 'guest@guest.com'
+      redirect_to user_path(@user.id), alert: 'ゲスト情報は変更できません'
+    else
+      render :edit
+    end
   end
 
   def update
@@ -21,11 +29,17 @@ class UsersController < ApplicationController
   end
 
   def hide
-    @user.update(is_deleted: true)
-    # ログアウトさせる
-    reset_session
-    flash[:note] = "退会が完了しました。またのご利用をおまちしております"
-    redirect_to root_path
+    if @user.id != current_user.id
+      redirect_to users_path, alert: 'アクセスできません'
+    elsif @user.email == 'guest@guest.com'
+      redirect_to user_path(@user.id), alert: 'ゲスト情報は変更できません'
+    else
+      @user.update(is_deleted: true)
+      # ログアウトさせる
+      reset_session
+      flash[:note] = "退会が完了しました。またのご利用をおまちしております"
+      redirect_to root_path
+    end
   end
 
   private

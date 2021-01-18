@@ -13,8 +13,13 @@ class PostCommentsController < ApplicationController
 
   def destroy
     comment = PostComment.find_by(id: params[:id], post_id: params[:post_id])
-    comment.destroy
-    redirect_to post_path(params[:post_id]),alert: 'コメントを削除しました'
+    # 編集者制限
+    if comment.user_id != current_user.id
+      redirect_to posts_path, alert: 'アクセスできません'
+    else
+      comment.destroy
+      redirect_to post_path(params[:post_id]),alert: 'コメントを削除しました'
+    end
   end
 
   private
