@@ -12,8 +12,8 @@
 <p>評価: <span id="star"></span></p>
 <p>説明:</p>
 <p><%= render_with_hashtags(@post.body) %></p>
-<% if user_signed_in? && post_comment.user == current_user %>
-  <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
+<% if user_signed_in? && @post.user.id == current_user.id  %>
+<p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
 <% end %>
 <!--いいねの保存と削除分岐-->
 <% if @post.favorited_by?(current_user) %>
@@ -56,13 +56,13 @@
 
 <!--評価欄表示（読み込みのみ）のJavaScript-->
 <script>
-$('#star').raty({
-  size: 36,
-  starOff:  '<%= asset_path('star-off.png') %>',
-  starOn : '<%= asset_path('star-on.png') %>',
-  starHalf: '<%= asset_path('star-half.png') %>',
-  half: true,
-  readOnly: true,
-  score: <%= @post.rate %>
-});
+  $('#star').raty({
+    size: 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    half: true,
+    readOnly: true,
+    score: <%= @post.rate %>
+  });
 </script>

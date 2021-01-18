@@ -11,12 +11,17 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   # Post:Favorite = 1:N
   has_many :favorites, dependent: :destroy
+
   # ユーザが投稿に対していいね済みか判別
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
 
-  # DBにコミット直前に実施
+  # 部分一致投稿検索
+  def self.search(word)
+    @post = Post.where("title LIKE?", "%#{word}%")
+  end
+  # ハッシュタグ作成(DBにコミット直前)
   after_create do
     @post = Post.find_by(id: self.id)
     hashtags = self.body.scan(/[#][\w\p{Han}ぁ-ヶｦ-ﾟー]+/) # ハッシュタグを検出
