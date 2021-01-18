@@ -1,0 +1,12 @@
+<% if model.errors.any? %>
+  <div class='count_error'>
+    <%= model.errors.count %>件のエラーがあります
+    <ul>
+      <% model.errors.full_messages.each do |message| %>
+        <li>
+          <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

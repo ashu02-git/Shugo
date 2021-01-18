@@ -11,6 +11,9 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   # Post:Favorite = 1:N
   has_many :favorites, dependent: :destroy
+  # 文字数制限
+  validates :title, presence: true, length: { maximum: 30 }
+  validates :body, length: { maximum: 180 }
 
   # ユーザが投稿に対していいね済みか判別
   def favorited_by?(user)

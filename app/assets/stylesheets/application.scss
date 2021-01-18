@@ -23,13 +23,26 @@
 
   .notice {
     background-color: lightBlue;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 3px;
   }
 
-  .alert, .error {
+  .alert {
     background-color: #FF5733;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 3px;
   }
 }
-
+// render エラーメッセージ
+.count_error {
+    color: white;
+    background-color: #FF5733;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
 
 // profileアイコン画像
 .profile_icon {

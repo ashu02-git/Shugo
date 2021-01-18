@@ -8,12 +8,16 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy # User:Favorite = 1:N
   has_many :post_comments, dependent: :destroy # User:PostComment = 1:N
 
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :introduction, length: { maximum: 80 }
+
   attachment :profile_image # プロフィール画像attachment
 
   # ゲスト情報登録
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|
       user.name = "Guest"
+      user.introduction = "ゲストユーザです"
       user.password = SecureRandom.urlsafe_base64
       user.password_confirmation = user.password
     end
