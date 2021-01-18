@@ -11,7 +11,6 @@ class Users::SessionsController < Devise::SessionsController
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-
   # GET /resource/sign_in
   # def new
   #   super
@@ -31,7 +30,7 @@ class Users::SessionsController < Devise::SessionsController
 
   def reject_user
     @user = User.find_by(email: params[:user][:email].downcase)
-    if (@user.valid_password?(params[:user][:password]) && (@user.active_for_authentication? == false))
+    if @user.valid_password?(params[:user][:password]) && (@user.active_for_authentication? == false)
       flash[:alert] = "退会済みです。"
       redirect_to new_user_session_path
     end
@@ -40,5 +39,4 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-
 end
