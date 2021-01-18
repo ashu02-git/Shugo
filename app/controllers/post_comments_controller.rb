@@ -18,7 +18,7 @@ class PostCommentsController < ApplicationController
       redirect_to posts_path, alert: 'アクセスできません'
     else
       comment.destroy
-      redirect_to post_path(params[:post_id]),alert: 'コメントを削除しました'
+      redirect_to post_path(params[:post_id]), alert: 'コメントを削除しました'
     end
   end
 
