@@ -29,10 +29,12 @@ class Users::SessionsController < Devise::SessionsController
   protected
 
   def reject_user
-    @user = User.find_by(email: params[:user][:email].downcase)
-    if @user.valid_password?(params[:user][:password]) && (@user.active_for_authentication? == false)
-      flash[:alert] = "退会済みです。"
-      redirect_to new_user_session_path
+    if @user = User.find_by(email: params[:user][:email].downcase)
+      if @user.valid_password?(params[:user][:password]) && (@user.active_for_authentication? == false)
+        redirect_to new_user_session_path, alert: "退会済みです。"
+      end
+    else
+      redirect_to new_user_registration_path, alert: "新規登録をお願いします"
     end
   end
   # If you have extra params to permit, append them to the sanitizer.
