@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :set_post, except: [:new, :create, :index, :hashtag]
+
   def new
     @post = Post.new
   end
@@ -7,8 +9,11 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     @post.rate ||= 0
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      redirect_to posts_path, notice: '投稿されました'
+    else
+      render :new
+    end
   end
 
   def index
@@ -16,24 +21,26 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @post_comment = PostComment.new
   end
 
   def edit
-    @post = Post.find(params[:id])
   end
 
   def update
-    @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to post_path(@post.id)
+    if params[:post][:rate] == ""
+      params[:post][:rate] = "0"
+    end
+    if @post.update(post_params)
+      redirect_to post_path(@post.id), notice: '変更が保存されました'
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, alert: '投稿を削除しました'
   end
 
   # ハッシュタグに紐づいたpost一覧
@@ -46,5 +53,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:user_id, :category_id, :title, :body, :image, :rate)
+  end
+
+  def set_post
+    @post = Post.find(params[:id])
   end
 end

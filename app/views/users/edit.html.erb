@@ -1,4 +1,7 @@
 <h2>プロフィール編集</h2>
+<!--エラー項目-->
+<%= render 'layouts/error_messages', model: @user %>
+<!--変更記入欄-->
 <%= form_with model:@user, local:true do |f| %>
   <%= f.label 'ユーザ名' %><br />
   <%= f.text_field :name, autofocus: true, placeholder: "ユーザ名" %><br />
