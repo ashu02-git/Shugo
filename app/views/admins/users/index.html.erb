@@ -1,0 +1,11 @@
+<h2>ユーザ一覧</h2>
+<% @users.each do |user| %>
+  <%= link_to admins_user_path(user.id) do %>
+    <%= attachment_image_tag user, :profile_image, class: "post_profile_icon", fallback: "shugo_logo.png" %>
+    <%= user.name %>
+    <% if user.is_deleted == true %>
+      <span style="color:red;">（退会済み）</span>
+    <% end %>
+    <br />
+  <% end %>
+<% end %>
