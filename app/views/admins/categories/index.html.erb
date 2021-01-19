@@ -1,0 +1,25 @@
+<h2>カテゴリ追加</h2>
+<%= form_with model:@category, url: admins_categories_path, local:true do |f| %>
+  <h4>カテゴリ名</h4>
+  <%= f.text_field :name %>
+  <%= f.submit '追加' %>
+<% end %>
+
+<h2>カテゴリ一覧</h2>
+<table>
+  <thead>
+    <tr>
+      <th>カテゴリ名</tr>
+    </tr>
+  </thead>
+  <tbody>
+  <% @categories.each do |category| %>
+    <tr>
+      <td><%= category.name %></td>
+      <td><%= link_to '編集', edit_admins_category_path(category) %></td>
+      <td><%= link_to '削除',  admins_category_path(category), method: :delete, data: { confirm: '削除しますか？' } %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

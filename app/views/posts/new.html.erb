@@ -1,0 +1,20 @@
+<h2>新規投稿</h2>
+<%= render 'layouts/error_messages', model: @post %>
+<%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
+  <%= f.label '画像'%>
+  <%= f.attachment_field :image %><br />
+  <%= f.label 'タイトル' %>
+  <%= f.text_field :title %><br />
+  <%= f.label 'カテゴリ' %>
+  <%= f.collection_select :category_id, Category.all, :id, :name %><br />
+  <!--評価欄-->
+  <div class="field" id="star">
+    <%= f.label :evaluation, "評価：" %>
+    <%= f.hidden_field :rate, id: :review_star %>
+  </div>
+  <%= f.label '説明' %> *ハッシュタグに全角＃は使えません<br />
+  <%= f.text_area :body, size: "40x4", placeholder: "口当たり、味わい、後味などの感想をここに" %><br />
+  <%= f.submit '投稿する'%>
+<% end %>
+<!--評価欄JavaScript-->
+<%= render 'posts/rate' %>

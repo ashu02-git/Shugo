@@ -4,22 +4,30 @@
     <title>Shugo</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <li><%= current_user.name%> さん</li>
-      <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-    <% elsif admin_signed_in? %>
-      <li>管理者</li>
-      <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
-    <% else %>
-      <%= link_to "新規登録", new_user_registration_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+    <header>
+      <%= render 'layouts/header' %>
+      <% if user_signed_in? || admin_signed_in? %>
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.select 'range', options_for_select([['--検索項目--',''],['ユーザ名','1'],['タイトル','2']]) %>
+          <%= f.text_field (:word) %>
+          <%= f.submit "検索" %>
+        <% end%>
+      <% end %>
+    </header>
+    <br>
+    <!--flashメッセージ表示-->
+    <div class="notifications">
+      <% flash.each do |key, value| %>
+        <!--CSS適用 flash keyのクラス作成-->
+        <%= content_tag(:div, value, class: key) %>
+      <% end %>
+    </div>
 
     <%= yield %>
   </body>

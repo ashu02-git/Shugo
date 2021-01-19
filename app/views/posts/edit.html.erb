@@ -1,0 +1,22 @@
+<h2>投稿編集画面</h2>
+<%= render 'layouts/error_messages', model: @post %>
+<%= form_with model:@post, url: post_path, local: true do |f| %>
+  <%= f.label '画像'%>
+  <%= f.attachment_field :image %><br />
+  <%= f.label 'タイトル' %>
+  <%= f.text_field :title %><br />
+  <%= f.label 'カテゴリ' %>
+  <%= f.collection_select :category_id, Category.all, :id, :name %><br />
+  <!--現在の評価を表示し、編集-->
+  <div class="field", data-score=<%= @post.rate %>, id="star">
+    <%= f.label :rate, "評価：" %>
+    <%= f.hidden_field :rate, id: :review_star %>
+  </div>
+  <%= f.label '説明' %> *ハッシュタグに全角の＃は使えません<br />
+  <%= f.text_area :body, size: "40x4", placeholder: "口当たり、味わい、後味などの感想をここに" %><br />
+  <%= f.submit '編集内容を保存'%>
+<% end %>
+<p></p>
+
+<!--評価欄JavaScript-->
+<%= render 'posts/rate' %>

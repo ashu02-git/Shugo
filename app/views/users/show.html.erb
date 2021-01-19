@@ -1,0 +1,41 @@
+<div class="profile-container">
+  <h3 class="profile-name">
+    ユーザ:<%= @user.name %>
+    <% if @user.is_deleted == true %>
+      <span style="color:red;">（退会済み）</span>
+    <% end %>
+  </h3>
+  <%= attachment_image_tag @user, :profile_image, class: "profile_icon", fallback: "shugo_logo.png" %><br />
+  <br />
+  <p>自己紹介：</p>
+  <p><%= @user.introduction %></p>
+  <% if user_signed_in? && @user.id == current_user.id %>
+    <p><%= link_to 'ユーザ編集', edit_user_path(@user.id), class: "btn btn-outline-success" %></p>
+    <p><%= link_to "退会", user_hide_path(current_user.id), method: :patch, data: { confirm: '退会しますか？' }, class: "btn btn-outline-danger" %></p>
+  <% end %>
+</div>
+
+<h2><%= @user.name %>さんの投稿一覧</h2>
+<% @posts.each do |post| %>
+<div>
+  <p><%= attachment_image_tag post, :image, class: "post_image" %></p>
+  <p>タイトル:<%= link_to post.title, post_path(post.id) %></p>
+  <p>
+  評価: <span id="star-rate-<%= post.id %>"></span>
+  <script>
+      // 繰り返し処理でもidを一意
+    $('#star-rate-<%= post.id %>').raty({
+      size: 36,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      // 読み込み表示のみ
+      readOnly: true,
+      score: <%= post.rate %>,
+    });
+  </script>
+  </p>
+  <p>ユーザーネーム:<%= post.user.name %></p>
+</div>
+<% end %>
