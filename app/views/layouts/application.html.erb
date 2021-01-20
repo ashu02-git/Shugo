@@ -9,16 +9,22 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body id="main-body">
     <header>
-      <%= render 'layouts/header' %>
-      <% if user_signed_in? || admin_signed_in? %>
-        <%= form_with url: search_path, method: :get, local: true do |f| %>
-          <%= f.select 'range', options_for_select([['--検索項目--',''],['ユーザ名','1'],['タイトル','2']]) %>
-          <%= f.text_field (:word) %>
-          <%= f.submit "検索" %>
-        <% end%>
-      <% end %>
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><%= image_tag 'shugo.png', :size => '100x100' %></a>
+          <%= render 'layouts/header' %>
+          <% if user_signed_in? || admin_signed_in? %>
+            <%= form_with url: search_path, method: :get, local: true do |f| %>
+              <%= f.select 'range', options_for_select([['--検索項目--',''],['ユーザ名','1'],['タイトル','2']]) %><br />
+              <%= f.text_field (:word) %>
+              <%= f.submit "検索" %>
+            <% end%>
+          <% end %>
+            </div>
+        </div>
+      </nav>
     </header>
     <br>
     <!--flashメッセージ表示-->
@@ -30,5 +36,7 @@
     </div>
 
     <%= yield %>
+    <script src="assets/javascrips/jquery.min.js"></script>
+    <script src="assets/javascrips/script.js"></script>
   </body>
 </html>
