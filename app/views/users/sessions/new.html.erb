@@ -1,19 +1,22 @@
-<h2>ログイン</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <h2>ログイン</h2>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email, style:"margin-top:10px;" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", size: "30px" %><br />
+        </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <div class="field">
+          <%= f.label :password, style: "margin-top:10px;" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", size: "30px" %><br />
+        </div>
+
+        <div class="actions">
+          <%= f.submit "ログイン", class:"btn btn-success", style:"margin-top:15px;" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
-
-
+</div>

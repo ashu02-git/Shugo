@@ -16,12 +16,18 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+// ベースCSS
 #main-body {
   color: #fcfcdf;
   background: #152442;
 }
 ul {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #FFD159;
 }
 // ハンバーガーアイコン
 #hm-icon {
@@ -119,6 +125,31 @@ ul {
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: 3px;
+}
+// スライド画像
+#slide-container {
+  height: 450px;
+}
+.image1 {
+  background-image: image-url("image1.png");
+}
+.image2 {
+  background-image: image-url("image2.png");
+}
+.image3 {
+  background-image: image-url("image3.png");
+}
+.image4 {
+  background-image: image-url("image4.png");
+}
+.image5 {
+  background-image: image-url("image5.jpg");
+}
+// rank_image
+.rank_image {
+  width:  100px;
+  height: 100px;
+  object-fit: contain;
 }
 
 // profileアイコン画像

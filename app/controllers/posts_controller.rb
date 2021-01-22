@@ -18,6 +18,11 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    # カテゴリから飛んできた場合
+    if params[:category_id].present?
+      @posts = Post.where(category_id: params[:category_id])
+      @category = Category.find(params[:category_id])
+    end
   end
 
   def show
