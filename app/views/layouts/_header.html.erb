@@ -27,7 +27,7 @@
         <li><%= link_to "ユーザ一覧", admins_users_path %></li>
       </ul>
     <% else %>
-      <%= link_to "新規登録", new_user_registration_path, class:"btn btn-outline-primary" %>
+      <%= link_to "新規登録", new_user_registration_path, class:"btn btn-outline-info" %>
       <%= link_to "ログイン", new_user_session_path, class:"btn btn-outline-success" %>
       <%= link_to 'ゲストログイン（閲覧用）', new_guest_session_path, method: :post, class:"btn btn-outline-warning" %>
     <% end %>
