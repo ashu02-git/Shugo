@@ -4,7 +4,7 @@
       <h2>投稿編集画面</h2>
       <%= render 'layouts/error_messages', model: @post %>
       <%= form_with model:@post, url: post_path, local: true do |f| %>
-        <%= attachment_image_tag @post, :image, id: "preview", class: "post_image_show" %>
+        <%= attachment_image_tag @post, :image, id: "preview", class: "post_image_show" %><br />
         <%= f.label '画像'%>
         <%= f.attachment_field :image %><br />
         <%= f.label 'タイトル' %>
@@ -20,8 +20,6 @@
         <%= f.text_area :body, size: "40x4", placeholder: "口当たり、味わい、後味などの感想をここに" %><br />
         <%= f.submit '編集内容を保存'%>
       <% end %>
-      <p></p>
-
       <!--評価欄JavaScript-->
       <%= render 'posts/rate' %>
     </div>

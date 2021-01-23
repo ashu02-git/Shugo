@@ -9,7 +9,7 @@
         <%= f.label 'ユーザ名' %><br />
         <%= f.text_field :name, autofocus: true, placeholder: "ユーザ名" %><br />
         <%= f.label 'プロフィール画像' %><br />
-        <%= attachment_image_tag @user, :profile_image, id: "preview", class: "profile_icon", fallback: "shugo_logo.png"%><br />
+        <%= attachment_image_tag @user, :profile_image, id: "icon_preview", class: "profile_icon", fallback: "shugo_logo.png"%><br />
         <%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %><br />
         <%= f.text_area :introduction, autofocus: true, placeholder: "自己紹介" %><br />
         <%= f.submit "変更を保存" %>
