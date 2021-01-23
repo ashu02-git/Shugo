@@ -16,22 +16,12 @@
       <p>説明:</p>
       <p><%= render_with_hashtags(@post.body) %></p>
       <% if user_signed_in? && @post.user.id == current_user.id  %>
-      <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
+        <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
       <% end %>
       <!--いいねの保存と削除分岐-->
-      <% if @post.favorited_by?(current_user) %>
-        <p>
-          <%= link_to post_favorites_path(@post), method: :delete do %>
-            <span style="color:red;">♥</span><%= @post.favorites.count %>
-          <% end %>
-        </p>
-      <% else %>
-        <p>
-          <%= link_to post_favorites_path(@post), method: :post do %>
-            <span style="color:red;">♡</span><%= @post.favorites.count %>
-          <% end %>
-        </p>
-      <% end %>
+      <div id="favo_btn_<%= @post.id %>">
+        <%= render 'favorites/favorite', post: @post %>
+      </div>
       <!--コメント一覧-->
       <div class="comments">
         <p>コメント件数：<%= @post.post_comments.count %></p>
