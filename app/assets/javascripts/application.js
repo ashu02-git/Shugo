@@ -19,6 +19,7 @@
 //= require bootstrap-sprockets
 //= require_tree .
 
+
 // jquery.raty.jsの記述
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {

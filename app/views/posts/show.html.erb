@@ -18,31 +18,13 @@
       <% if user_signed_in? && @post.user.id == current_user.id  %>
         <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
       <% end %>
-      <!--いいねの保存と削除分岐-->
+      <!--いいねのボタン-->
       <div id="favo_btn_<%= @post.id %>">
         <%= render 'favorites/favorite', post: @post %>
       </div>
-      <!--コメント一覧-->
-      <div class="comments">
-        <p>コメント件数：<%= @post.post_comments.count %></p>
-        <% @post.post_comments.each do |post_comment| %>
-          <%= post_comment.comment %>
-          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-          <%= post_comment.user.name %>
-          <% if user_signed_in? && post_comment.user == current_user %>
-            <div class="comment-delete">
-              <%= link_to '削除', post_post_comment_path(post_comment.post, post_comment), method: :delete, data: { confirm: '削除しますか？' } %>
-            </div>
-          <% end %>
-          <br />
-        <% end %>
-      </div>
-      <!--コメント入力欄-->
-      <div class="new-comment">
-        <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
-          <%= f.text_area :comment, size: "40x2", placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
+      <!--コメント機能-->
+      <div id="post_comments">
+        <%= render 'post_comments/comment', post: @post, post_comment: @post_comment %>
       </div>
 
       <p><%= link_to '一覧へ戻る', posts_path %></p>
