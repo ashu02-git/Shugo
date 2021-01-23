@@ -3,7 +3,7 @@
     <% @posts.each do |post| %>
     <div>
       <p><%= attachment_image_tag post, :image, class: "post_image" %></p>
-      <p>タイトル:<%= link_to post.title, post_path(post.id) %></p>
+      <p><%= link_to post.title, post_path(post.id) %></p>
       <p>
       評価: <span id="star-rate-<%= post.id %>"></span>
       <script>
