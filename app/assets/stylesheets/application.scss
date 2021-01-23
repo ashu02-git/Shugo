@@ -165,9 +165,10 @@ a {
 
 // post_image
 .post_image {
-  width:  200px;
-  height: 200px;
+  width:  180px;
+  height: 180px;
   object-fit: contain;
+  margin: 3px;
 }
 // post_profile_icon
 .post_profile_icon {
@@ -180,4 +181,36 @@ a {
   width:  400px;
   height: 400px;
   object-fit: contain;
+}
+// favo_btn
+.yes-favo {
+  padding: 7px 12px;
+  font-size: 14px;
+  color: #484752;
+  background-color: #FFD159;;
+  border: solid #FFD159;;
+  border-radius: 15px;
+}
+.no-favo {
+  padding: 7px 12px;
+  font-size: 14px;
+  color: #FFD159;
+  border: solid #FFD159;
+  border-radius: 15px;
+}
+// main
+main {
+  margin-bottom: 50px;
+}
+// footer
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  color: #fcfcdf;
+  background-color: #484752;
 }

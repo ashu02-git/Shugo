@@ -1,6 +1,9 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-12 col-sm-6">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'homes/left_side', categories: @categories, hashtags: @hashtags %>
+    </div>
+    <div class="col-md-10">
       <% if params[:category_id].present? %>
         <h2><%= @category.name %>一覧</h2>
       <% else %>
@@ -8,16 +11,22 @@
       <% end %>
       <div class="d-flex flex-wrap">
         <% @posts.each do |post| %>
-          <div class="card mx-auto mt-4 p-0 shadow-lg" style="width: 500px; background-color: gray;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-5 m-1">
+          <div class="card m-1 p-2 shadow-lg" style="width: 430px; background-color: gray;">
+            <div class="row no-gutters">
+              <div class="card-title m-2">
+                <!--タイトル-->
+                <%= link_to post.title, post_path(post.id) %>
+              </div>
+            </div>
+            <div class="row no-gutters">
+              <div class="col-md-5">
+                <%= link_to post_path(post.id) do %>
                   <!--画像-->
                   <%= attachment_image_tag post, :image, class: "post_image" %>
-                </div>
-                <div class="col-6">
-                  <!--タイトル-->
-                  <p><%= link_to post.title, post_path(post.id) %></p>
+                <% end %>
+              </div>
+              <div class="col-7">
+                <div class="card-body">
                   <!--評価-->
                   <p>
                   評価: <span id="star-rate-<%= post.id %>"></span>
@@ -38,12 +47,14 @@
                   <!--説明文-->
                   <p>説明： <%= post.body.truncate(20) %></p>
                   <!--投稿者-->
+                  <p>
                   投稿者:
                   <%= link_to user_path(post.user.id) do %>
                     <%= post.user.name %><br />
                   <% end %>
+                  </p>
                   <!--コメント数-->
-                  <span>コメント件数：<%= post.post_comments.count %></span>
+                  <p>コメント件数：<%= post.post_comments.count %></p>
                   <!--いいね機能-->
                   <span id="favo_btn_<%= post.id %>">
                    <%= render 'favorites/favorite', post: post %>

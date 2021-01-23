@@ -1,0 +1,9 @@
+<h3>Category</h3>
+  <% categories.each do |category| %>
+    <%= link_to category.name, posts_path(category_id: category.id), class: 'links' %> <br />
+  <% end %>
+<br />
+<h3>Hashtag</h3>
+  <% hashtags.each do |hashtag| %>
+    <%= link_to hashtag.hash_name, hashtag_path(name: hashtag.hash_name), class: 'links' %> <br />
+  <% end %>
