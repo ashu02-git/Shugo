@@ -4,11 +4,13 @@ class SearchesController < ApplicationController
   def search
     @range = params[:range]
     @word = params[:word]
+    @categories = Category.all
+    @hashtags = Hashtag.all.order("id DESC").limit(20)
 
     if @range == '1'
       @user = User.search(@word)
     else
-      @post = Post.search(@word)
+      @posts = Post.search(@word)
     end
   end
 end

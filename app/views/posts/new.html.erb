@@ -5,7 +5,7 @@
       <%= render 'layouts/error_messages', model: @post %>
       <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
         <!--画像プレビュー-->
-        <%= attachment_image_tag @post, :image, id: "preview", class: "post_image_show", fallback: "no_image.png" %>
+        <%= attachment_image_tag @post, :image, id: "preview", class: "post_image_show", fallback: "no_image.png" %><br />
         <!--画像投稿欄-->
         <%= f.label '画像'%>
         <%= f.attachment_field :image %><br />

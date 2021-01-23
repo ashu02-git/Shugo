@@ -33,6 +33,6 @@ Rails.application.routes.draw do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
   end
-  get '/posts/hashtag/:name' => 'posts#hashtag'
+  get '/posts/hashtag/:name' => 'posts#hashtag', as: 'hashtag'
   get '/search' => 'searches#search'
 end

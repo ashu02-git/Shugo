@@ -17,7 +17,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: :desc)
+    @categories = Category.all
+    @hashtags = Hashtag.all.order("id DESC").limit(20)
     # カテゴリから飛んできた場合
     if params[:category_id].present?
       @posts = Post.where(category_id: params[:category_id])
@@ -63,6 +65,8 @@ class PostsController < ApplicationController
   def hashtag
     @tag = Hashtag.find_by(hash_name: params[:name])
     @posts = @tag.posts
+    @categories = Category.all
+    @hashtags = Hashtag.all.order("id DESC").limit(20)
   end
 
   private

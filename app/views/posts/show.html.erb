@@ -2,8 +2,20 @@
   <div class="row justify-content-center">
     <div class="col-10">
       <h4><%= @post.title %></h4>
-      <p><%= attachment_image_tag @post, :image, class: "post_image_show" %></p>
-
+      <div class="row">
+        <div class="col-6">
+          <p><%= attachment_image_tag @post, :image, class: "post_image_show" %></p>
+        </div>
+        <div class="col-6">
+          <p>説明:</p>
+          <p><%= render_with_hashtags(@post.body) %></p>
+          <% if user_signed_in? && @post.user.id == current_user.id  %>
+            <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
+          <% end %>
+        </div>
+      </div>
+      <!-- id="star"がraty.jsの発火ポイント -->
+      <p>評価: <span id="star"></span></p>
       <p>
         投稿者:
         <%= link_to user_path(@post.user.id) do %>
@@ -11,17 +23,11 @@
           <%= @post.user.name %>
         <% end %>
       </p>
-      <!-- id="star"がraty.jsの発火ポイント -->
-      <p>評価: <span id="star"></span></p>
-      <p>説明:</p>
-      <p><%= render_with_hashtags(@post.body) %></p>
-      <% if user_signed_in? && @post.user.id == current_user.id  %>
-        <p><%= link_to '編集', edit_post_path %> <%= link_to '削除', post_path, method: :delete, data: { confirm: '削除しますか？' } %></p>
-      <% end %>
       <!--いいねのボタン-->
-      <div id="favo_btn_<%= @post.id %>">
+      <div id="favo_btn_<%= @post.id %>",class="favo_btn">
         <%= render 'favorites/favorite', post: @post %>
       </div>
+      <br />
       <!--コメント機能-->
       <div id="post_comments">
         <%= render 'post_comments/comment', post: @post, post_comment: @post_comment %>

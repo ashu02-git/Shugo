@@ -1,14 +1,14 @@
 <!--いいね送信・削除の分岐-->
 <% if post.favorited_by?(current_user) %>
-  <span>
+  <div>
     <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-      <span style="color:red;">♥</span><%= post.favorites.count %>
+      <span class="yes-favo"><i class="fas fa-beer"></i><%= post.favorites.count %> Like!</span>
     <% end %>
-  </span>
+  </div>
 <% else %>
-  <span>
+  <div>
     <%= link_to post_favorites_path(post), method: :post, remote: true do %>
-      <span style="color:red;">♡</span><%= post.favorites.count %>
+      <span class="no-favo"><i class="fas fa-beer"></i><%= post.favorites.count %> Like!</span>
     <% end %>
-  </span>
+  </div>
 <% end %>
