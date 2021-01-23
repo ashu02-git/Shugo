@@ -33,6 +33,19 @@ $(function(){
     reader.readAsDataURL(e.target.files[0]);
   });
 });
+// User画像のプレビュー用js
+$(function(){
+  // inputのidから情報の取得
+  $('#user_profile_image').on('change', function (e) {
+    // 既存の画像のurlの取得
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      $("#preview").attr('src', e.target.result);
+    }
+    // 取得したurlにアップロード画像のurlを挿入
+    reader.readAsDataURL(e.target.files[0]);
+  });
+});
 // jquery.raty.jsの記述
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
