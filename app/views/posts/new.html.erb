@@ -4,10 +4,15 @@
       <h2>新規投稿</h2>
       <%= render 'layouts/error_messages', model: @post %>
       <%= form_with model:@post, url: posts_path, method: :post, local: true do |f| %>
+        <!--画像プレビュー-->
+        <%= attachment_image_tag @post, :image, id: "preview", class: "post_image_show", fallback: "no_image.png" %>
+        <!--画像投稿欄-->
         <%= f.label '画像'%>
         <%= f.attachment_field :image %><br />
+        <!--タイトル投稿欄-->
         <%= f.label 'タイトル' %>
         <%= f.text_field :title %><br />
+        <!--カテゴリ選択-->
         <%= f.label 'カテゴリ' %>
         <%= f.collection_select :category_id, Category.all, :id, :name %><br />
         <!--評価欄-->
@@ -15,7 +20,7 @@
           <%= f.label :evaluation, "評価：" %>
           <%= f.hidden_field :rate, id: :review_star %>
         </div>
-        <%= f.label '説明' %> *ハッシュタグに全角＃は使えません<br />
+        <%= f.label '説明' %> <span class="small-text">*ハッシュタグに全角＃は使えません</span><br />
         <%= f.text_area :body, size: "40x4", placeholder: "口当たり、味わい、後味などの感想をここに" %><br />
         <%= f.submit '投稿する'%>
       <% end %>
