@@ -155,14 +155,16 @@ a {
   height: 100px;
   object-fit: contain;
 }
-
 // profileアイコン画像
 .profile_icon {
   width:  120px;
   height: 120px;
   border-radius: 50%;
 }
-
+// 自己紹介分
+.introduction {
+  word-break: normal;
+}
 // post_image
 .post_image {
   width:  180px;
@@ -202,6 +204,7 @@ a {
 main {
   margin-bottom: 50px;
 }
+
 // footer
 footer {
   position: fixed;
