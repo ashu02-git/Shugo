@@ -1,6 +1,15 @@
 
     <% if user_signed_in? %>
-      <h4>ログインユーザ: <%= current_user.name%> さん</h4>
+    <div class="conrainer-lg">
+        <div class="row">
+          <h5>ログインユーザ: <%= current_user.name%> さん</h5>
+        </div>
+        <div class="row justify-content-around">
+          <%= link_to "投稿一覧", posts_path, class:"btn btn-outline-success" %>
+          <%= link_to "新規投稿", new_post_path, class:"btn btn-outline-info mx-5" %>
+          <%= link_to "マイページ", user_path(current_user), class:"btn btn-outline-primary" %>
+        </div>
+      </div>
       <div id="hm-icon" >
         <a class="menu-trigger" href="#">
           <span></span>
@@ -12,10 +21,8 @@
         <ul>
           <li><h2>MENU</h2></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-          <li><%= link_to "投稿一覧", posts_path %></li>
-          <li><%= link_to "新規投稿", new_post_path %></li>
           <li><%= link_to "ユーザ一覧", users_path %></li>
-          <li><%= link_to "マイページ", user_path(current_user) %></li>
+          <li><%= link_to "お問い合わせ", form_path %></li>
         </ul>
       </div>
     <% elsif admin_signed_in? %>
@@ -25,9 +32,11 @@
         <li><%= link_to "カテゴリ", admins_categories_path %></li>
         <li><%= link_to "投稿一覧", admins_posts_path %></li>
         <li><%= link_to "ユーザ一覧", admins_users_path %></li>
+        <li><%= link_to 'お問い合わせ確認', 'https://docs.google.com/forms/d/1UkmBRaQ_Q5N3sGDokaaNzCV6Kqx3oLE_gmQzyrWLB0g/edit' %></li>
       </ul>
     <% else %>
       <%= link_to "新規登録", new_user_registration_path, class:"btn btn-outline-info" %>
       <%= link_to "ログイン", new_user_session_path, class:"btn btn-outline-success" %>
       <%= link_to 'ゲストログイン（閲覧用）', new_guest_session_path, method: :post, class:"btn btn-outline-warning" %>
+      <%= link_to "お問い合わせ", form_path, class:"btn btn-outline-light"%>
     <% end %>
