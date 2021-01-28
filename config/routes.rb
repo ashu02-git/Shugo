@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'homes#top'
+  get 'form' => 'homes#form', as: 'form'
   # ユーザログイン機能のルーティング
   devise_for :users, skip: :all
   devise_scope :user do
